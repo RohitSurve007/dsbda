@@ -1,0 +1,46 @@
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import seaborn as sns
+df=pd.read_csv('C:/Users/Rohit Surve/Desktop/heart.csv')
+df.head()
+
+#bar-graph
+sns.countplot(x='sex',data=df)
+plt.title('Number of males and females')
+plt.xticks([0,1],['females','males'])
+plt.show()
+#we can do the same for target where 0=less chance of heart attack and 1=more chance
+
+#Chances of heart desease by gender
+sns.countplot(x='sex',data=df,hue='target')
+plt.title('chances of heart disease by gender')
+plt.xticks([0,1],['female','males'])
+plt.legend(labels=['less chance','high chance'])
+plt.show()
+
+#histogram
+sns.histplot(df['cp'])
+
+#plot a scatter plot for age and target variables
+plt.scatter(x='age',y='target',data=df)
+plt.title('age vs chances of getting heart disease')
+plt.xlabel('age')
+plt.ylabel('target')
+plt.show()
+
+#heatmap
+sns.heatmap(df.corr(),annot=True)
+plt.title('degree of Correlation of variables in the dataset')
+
+#pie chart
+list1=list(df['cp'].value_counts(normalize=True))
+plt.pie(list1,labels=['angina','non angina','atypical','asymptotic'])
+plt.show()
+
+#Relation between Types of Chest pain and number of people having high or low chances of heart attack
+sns.countplot(x='cp',hue='target',data=df)
+plt.title('Relation between Types of Chest pain and number of people having high or low chances of heart attack')
+plt.xticks([0,1,2,3],['typical angina','atypical angina','non-anginal pain','asymptotic'])
+plt.legend(labels=['low chance','high chance'])
+plt.show()
