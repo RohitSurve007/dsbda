@@ -1,0 +1,39 @@
+import pandas as pd
+import numpy as np
+df = pd.read_csv('C:/Users/Rohit Surve/Desktop/dataset_Facebook.csv', sep = ";") # put your path here
+df.head()
+
+#To create a subsets 
+subset1=df[['Type','Category','Post Month']]
+print(subset1.head(10))
+
+subset2=df[['Type','like','share']]
+print(subset1.head(10))
+
+#Merge The Data
+merged=pd.concat([subset1,subset2],axis=1)
+print(merged)
+
+#Sort The Merged Data
+merged.sort_values(by=['Category',],ascending=True)
+
+#Transpose Dataset to Convert rows to columns and columns to rows
+merged.T
+merged.transpose()
+
+#SHAPE DATA
+print(df.shape)
+
+#Reshape data
+import numpy as np
+arr=np.array(df[['Post Month','Post Weekday']].head(6))
+reshaped=arr.reshape(3,4)
+print(reshaped)
+
+
+# reshape the data by applying melt()
+df_melted = df1.melt (id_vars = None , value_vars = None , ignore_index = False )
+print(df_melted)
+# pivot
+df_pivoted = df_melted.pivot( columns = 'variable',values = 'value') 
+print( df_pivoted)
