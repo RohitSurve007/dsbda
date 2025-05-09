@@ -1,0 +1,47 @@
+import requests
+import bs4
+request1=requests.get('https://www.flipkart.com/apple-iphone-15-pro-max-blue-titanium-256-gb/p/itm4a0093df4a3d7')
+request1
+
+request1.content
+
+soup=bs4.BeautifulSoup(request1.text)
+
+
+#fetching reviews
+reviews=soup.find_all('div',{'class' : 'ZmyHeo'});
+for review in reviews:
+  print(review.get_text()+"\n\n")
+
+
+#Average overall ratings 
+ratings=soup.find('div',{'class':'ipqd2A'}).get_text();
+print(ratings)
+
+
+#individual ratings 
+individaul_ratings =soup.find_all('div',{'class':'XQDdHH Ga3i8K'});
+for indi_rating in individaul_ratings:
+    print(indi_rating.get_text() + "\n")
+
+
+#fetching tags
+tags=soup.find('span',{'class':'_4EqiSd'}).get_text();
+tags
+
+#fetching customer names 
+customer_name=soup.find_all('p',{'class':'_2NsDsF AwS1CA'});
+for cust_name in customer_name:
+    print(cust_name.get_text() + "\n")
+
+
+#fetch Price of Product:- This are extra comments
+price=soup.find('div',{'class':'Nx9bqj CxhGGd'}).get_text();
+print(price)
+
+
+questions=soup.find_all('div',{'class':'wys2hv _43gOsC'});
+for question in questions:
+    print(question.get_text())
+    answer=question.find_next('div',{'class':'JxAXcP'}).get_text();
+    print(answer+ "\n\n")
